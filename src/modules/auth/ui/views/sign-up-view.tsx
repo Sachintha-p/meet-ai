@@ -65,8 +65,7 @@ export const SignUpView = () => {
                     router.push("/");
                 },
                 onError: ({error}) => {
-                    console.error("Signup error", error);
-                    setError(error?.message || "Unknown signup error");
+                    setError(error.message)
                 }
             }
         );

@@ -71,7 +71,7 @@ export const SignInView = () => {
                             <div className="flex flex-col gap-6">
                                 <div className="flex flex-col item-center text-center">
                                     <h1 className= "text-2xl font-bold">
-                                        Welcome back
+                                        Welcome Back
                                     </h1>
                                     <p className="text-muted-foreground text-balance">
                                         Login to your account
