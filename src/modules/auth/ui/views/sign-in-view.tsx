@@ -31,6 +31,7 @@ const formSchema = z.object({
 export const SignInView = () => {
     const router = useRouter();
     const [error, setError] =useState<string | null>(null);
+    const [pending, setPending] = useState(false);
 
    const form = useForm<z.infer<typeof formSchema>>({
        resolver: zodResolver(formSchema),
@@ -40,27 +41,33 @@ export const SignInView = () => {
        }
    });
 
-   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+   const onSubmit = (data: z.infer<typeof formSchema>) => {
        setError(null);
+       setPending(true);
 
-       const { error }= await authClient.signIn.email(
+       authClient.signIn.email(
            {
                email: data.email,
                password: data.password,
            },
            {
                onSuccess: () => {
+                   setPending(false);
                    router.push("/");
                },
+               onError: ({error}) => {
+                   setError(error.message)
+       }
            }
        );
+
    }
     return(
         <div className="flex flex-col gap-6">
             <Card className="overflow-hidden p-0">
                 <CardContent className="grid p-0 md:grid-cols-2">
                     <Form {...form}>
-                        <form className= "p-6 md:p-8">
+                        <form onSubmit={form.handleSubmit(onSubmit)} className= "p-6 md:p-8">
                             <div className="flex flex-col gap-6">
                                 <div className="flex flex-col item-center text-center">
                                     <h1 className= "text-2xl font-bold">
@@ -108,13 +115,14 @@ export const SignInView = () => {
                                         )}
                                     />
                                 </div>
-                                {true && (
+                                {!!error && (
                                     <Alert className="bg-destructive/10 border-none">
                                         <OctagonAlertIcon className="h-4 w-4 !text-destructive"/>
-                                        <AlertTitle>Error</AlertTitle>
+                                        <AlertTitle>error</AlertTitle>
                                     </Alert>
                                 )}
                                 <Button
+                                    disabled={pending}
                                 type="submit"
                                 className="w-full"
                                 >
@@ -127,6 +135,7 @@ export const SignInView = () => {
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <Button
+                                        disabled={pending}
                                         variant="outline"
                                         type="button"
                                         className="w-full"
@@ -134,6 +143,7 @@ export const SignInView = () => {
                                         Google
                                     </Button>
                                     <Button
+                                        disabled={pending}
                                         variant="outline"
                                         type="button"
                                         className="w-full"
