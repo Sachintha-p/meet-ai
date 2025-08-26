@@ -62,6 +62,27 @@ export const SignInView = () => {
        );
 
    }
+
+    const onSocial = (provider : "github" | "google") => {
+        setError(null);
+        setPending(true);
+
+        authClient.signIn.social(
+            {
+                provider: provider,
+            },
+            {
+                onSuccess: () => {
+                    setPending(false);
+                    router.push("/");
+                },
+                onError: ({error}) => {
+                    setError(error.message)
+                }
+            }
+        );
+
+    }
     return(
         <div className="flex flex-col gap-6">
             <Card className="overflow-hidden p-0">
@@ -118,7 +139,7 @@ export const SignInView = () => {
                                 {!!error && (
                                     <Alert className="bg-destructive/10 border-none">
                                         <OctagonAlertIcon className="h-4 w-4 !text-destructive"/>
-                                        <AlertTitle>error</AlertTitle>
+                                        <AlertTitle>{error}</AlertTitle>
                                     </Alert>
                                 )}
                                 <Button
@@ -136,6 +157,7 @@ export const SignInView = () => {
                                 <div className="grid grid-cols-2 gap-4">
                                     <Button
                                         disabled={pending}
+                                        onClick={() =>onSocial("google")}
                                         variant="outline"
                                         type="button"
                                         className="w-full"
@@ -144,6 +166,7 @@ export const SignInView = () => {
                                     </Button>
                                     <Button
                                         disabled={pending}
+                                        onClick={() =>onSocial("github")}
                                         variant="outline"
                                         type="button"
                                         className="w-full"
