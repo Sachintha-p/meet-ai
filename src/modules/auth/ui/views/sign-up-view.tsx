@@ -65,7 +65,7 @@ export const SignUpView = () => {
                     router.push("/");
                 },
                 onError: ({error}) => {
-                    setError(error.message)
+                    setError(error.message);
                 }
             }
         );
@@ -96,7 +96,7 @@ export const SignUpView = () => {
                                                 <FormControl>
                                                     <Input
                                                         type = "text"
-                                                        placeholder= "abcd ABCD"
+                                                        placeholder= "sachintha praneeth"
                                                         {...field}
                                                     />
                                                 </FormControl>
@@ -134,7 +134,7 @@ export const SignUpView = () => {
                                                 <FormControl>
                                                     <Input
                                                         type = "password"
-                                                        placeholder= "********"
+                                                        placeholder= ""
                                                         {...field}
                                                     />
                                                 </FormControl>
@@ -153,7 +153,7 @@ export const SignUpView = () => {
                                                 <FormControl>
                                                     <Input
                                                         type = "password"
-                                                        placeholder= "********"
+                                                        placeholder= ""
                                                         {...field}
                                                     />
                                                 </FormControl>
@@ -165,7 +165,7 @@ export const SignUpView = () => {
                                 {!!error && (
                                     <Alert className="bg-destructive/10 border-none">
                                         <OctagonAlertIcon className="h-4 w-4 !text-destructive"/>
-                                        <AlertTitle>error</AlertTitle>
+                                        <AlertTitle>{error}</AlertTitle>
                                     </Alert>
                                 )}
                                 <Button
@@ -199,9 +199,9 @@ export const SignUpView = () => {
                                     </Button>
                                 </div>
                                 <div className="text-center text-sm">
-                                    Don&apos;t have an account?{" "}
-                                    <Link href="sign-up" className="underline underline-offset-4">
-                                        Sign up
+                                    Already have an account?{" "}
+                                    <Link href="sign-in" className="underline underline-offset-4">
+                                        Sign in
                                     </Link>
                                 </div>
                             </div>
