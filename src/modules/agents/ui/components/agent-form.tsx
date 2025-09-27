@@ -42,7 +42,7 @@ export const AgentForm = ({
         ({
             onSuccess: async () => {
                 await queryClient.invalidateQueries(
-                    trpc.agents.getMany.queryOptions()
+                    trpc.agents.getMany.queryOptions({})
                 );
                 if (initialValues?.id) {
                     queryClient.invalidateQueries(
@@ -82,9 +82,7 @@ export const AgentForm = ({
         <Form {...form}>
             <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
                 <GeneratedAvatar
-                    seed={form.watch("name")}
-                    varient="bottsNeutral"
-                    className="border size-16"
+                    seed={form.watch("name")} variant={"botttsNeutral"} className={'border size-16'}
                 />
                 <FormField
                     name="name"
