@@ -47,7 +47,7 @@ export const verification = pgTable("verification", {
     updatedAt: timestamp('updated_at').$defaultFn(() => /* @__PURE__ */ new Date())
 });
 
-export const agents = pgTable("agents", {
+export const agent = pgTable("agents", {
     id: text('id')
         .primaryKey()
         .$defaultFn(() => nanoid()),
