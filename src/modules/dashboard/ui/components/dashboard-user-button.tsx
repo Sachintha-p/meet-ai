@@ -18,7 +18,7 @@ import {
     DrawerTitle,
     DrawerTrigger
 } from "@/components/ui/drawer"
-import {GenerateAvatar} from "@/components/generated-avatar";
+import {GeneratedAvatar} from "@/components/generated-avatar";
 import {ChevronDownIcon, CreditCardIcon, LogOutIcon} from "lucide-react";
 import {useRouter} from "next/navigation";
 import {useIsMobile} from "@/hooks/use-mobile";
@@ -54,7 +54,7 @@ export const DashboardUserButton = () => {
                            <AvatarImage src={data.user.image} />
                        </Avatar>
                    ) : (
-                       <GenerateAvatar
+                       <GeneratedAvatar
                            seed={data.user.name}
                            variant="initials"
                            className="size-9 mr-3"
@@ -105,7 +105,7 @@ export const DashboardUserButton = () => {
                     <AvatarImage src={data.user.image} />
                     </Avatar>
                 ) : (
-                    <GenerateAvatar
+                    <GeneratedAvatar
                         seed={data.user.name}
                         variant="initials"
                         className="size-9 mr-3"
